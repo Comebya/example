@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>轻账本小程序</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="phone-shell">
+    <header class="mini-header">
+      <div class="status-bar">
+        <span>9:41</span>
+        <span>5G 100%</span>
+      </div>
+      <div class="nav-bar">
+        <button class="icon-btn" aria-label="返回">‹</button>
+        <h1>轻账本</h1>
+        <button class="capsule" aria-label="微信小程序菜单">
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <section class="page page-active" data-page="home">
+      <div class="balance-panel">
+        <p class="muted">本月结余</p>
+        <strong id="balanceAmount">¥0.00</strong>
+        <div class="summary-grid">
+          <div>
+            <span>收入</span>
+            <b id="incomeAmount">¥0.00</b>
+          </div>
+          <div>
+            <span>支出</span>
+            <b id="expenseAmount">¥0.00</b>
+          </div>
+        </div>
+      </div>
+
+      <div class="quick-actions">
+        <button class="action-btn" data-quick="餐饮" data-type="expense">餐饮</button>
+        <button class="action-btn" data-quick="交通" data-type="expense">交通</button>
+        <button class="action-btn" data-quick="购物" data-type="expense">购物</button>
+        <button class="action-btn" data-quick="工资" data-type="income">工资</button>
+      </div>
+
+      <section class="section-head">
+        <h2>最近记录</h2>
+        <select id="recordFilter" aria-label="筛选记录">
+          <option value="all">全部</option>
+          <option value="income">收入</option>
+          <option value="expense">支出</option>
+        </select>
+      </section>
+      <ul class="record-list" id="recordList"></ul>
+    </section>
+
+    <section class="page" data-page="add">
+      <form class="entry-form" id="entryForm">
+        <div class="segmented" role="group" aria-label="收支类型">
+          <button type="button" class="segment segment-active" data-type="expense">支出</button>
+          <button type="button" class="segment" data-type="income">收入</button>
+        </div>
+
+        <label>
+          金额
+          <input id="amountInput" type="number" min="0" step="0.01" placeholder="0.00" required>
+        </label>
+
+        <label>
+          分类
+          <select id="categoryInput" required></select>
+        </label>
+
+        <label>
+          备注
+          <input id="noteInput" type="text" maxlength="20" placeholder="例如：午餐、地铁、奖金">
+        </label>
+
+        <label>
+          日期
+          <input id="dateInput" type="date" required>
+        </label>
+
+        <button class="primary-btn" type="submit">保存记录</button>
+      </form>
+    </section>
+
+    <section class="page" data-page="stats">
+      <section class="section-head">
+        <h2>分类统计</h2>
+        <span class="muted">按支出排序</span>
+      </section>
+      <div id="statsList" class="stats-list"></div>
+    </section>
+
+    <nav class="tab-bar" aria-label="页面切换">
+      <button class="tab tab-active" data-target="home">
+        <span class="tab-icon">⌂</span>
+        首页
+      </button>
+      <button class="tab add-tab" data-target="add">
+        <span class="plus">+</span>
+        记一笔
+      </button>
+      <button class="tab" data-target="stats">
+        <span class="tab-icon">▥</span>
+        统计
+      </button>
+    </nav>
+  </main>
+
+  <template id="recordTemplate">
+    <li class="record-item">
+      <div class="record-icon"></div>
+      <div class="record-main">
+        <strong></strong>
+        <span></span>
+      </div>
+      <div class="record-side">
+        <b></b>
+        <button type="button">删除</button>
+      </div>
+    </li>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
